@@ -11,7 +11,6 @@ import java.util.List;
 @Entity
 public class Item {
 
-    @NotNull
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -37,8 +36,7 @@ public class Item {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    public Item() {
-    }
+    public Item() { }
 
     public Item(String name, String description, Float price) {
         this.name = name;
