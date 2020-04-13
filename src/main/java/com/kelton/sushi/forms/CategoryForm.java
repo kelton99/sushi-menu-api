@@ -18,7 +18,7 @@ public class CategoryForm {
         this.name = name;
     }
 
-    public Category convert(CategoryRepository catRepo) {
+    public Category toEntity(CategoryRepository catRepo) {
         return new Category(name);
     }
 

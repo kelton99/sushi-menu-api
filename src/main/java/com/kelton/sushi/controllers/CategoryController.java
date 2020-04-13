@@ -39,7 +39,7 @@ public class CategoryController {
     @PostMapping
     @Transactional
     public ResponseEntity<CategoryDTO> saveCategory(@RequestBody @Valid CategoryForm form, UriComponentsBuilder uriBuilder){
-        var category = form.convert(catRepo);
+        var category = form.toEntity(catRepo);
         catRepo.save(category);
 
         URI uri = uriBuilder.path("/category/{id}").buildAndExpand(category.getId()).toUri();

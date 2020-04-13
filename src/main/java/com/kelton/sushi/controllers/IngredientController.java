@@ -25,7 +25,7 @@ public class IngredientController {
     @GetMapping
     public List<IngredientDTO> getIngredients(){
         var ingredients = ingredientRepository.findAll();
-        return IngredientDTO.convert(ingredients);
+        return IngredientDTO.toDTO(ingredients);
     }
 
     @GetMapping("/{id}")
@@ -39,7 +39,7 @@ public class IngredientController {
     @PostMapping
     @Transactional
     public ResponseEntity<IngredientDTO> saveIngredient(@RequestBody @Valid IngredientForm form, UriComponentsBuilder uriBuilder){
-        var ingredient = form.convert(ingredientRepository);
+        var ingredient = form.toEntity(ingredientRepository);
         ingredientRepository.save(ingredient);
 
         URI uri = uriBuilder.path("/ingredient/{id}").buildAndExpand(ingredient.getId()).toUri();
