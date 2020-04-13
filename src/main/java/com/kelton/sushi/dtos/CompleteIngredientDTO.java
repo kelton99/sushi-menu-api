@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CompleteIngredient extends IngredientDTO {
+public class CompleteIngredientDTO extends IngredientDTO {
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private List<ItemDTO> itens;
 
-    public CompleteIngredient(Ingredient ingredient) {
+    public CompleteIngredientDTO(Ingredient ingredient) {
         super(ingredient);
         this.itens.addAll(ingredient.getItems().stream().map(ItemDTO::new).collect(Collectors.toList()));
     }

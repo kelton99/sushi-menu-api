@@ -1,6 +1,5 @@
 package com.kelton.sushi.controllers;
 
-import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
 import com.kelton.sushi.dtos.CategoryDTO;
 import com.kelton.sushi.dtos.CompleteCategoryDTO;
 import com.kelton.sushi.entities.Category;
@@ -50,10 +49,10 @@ public class CategoryController {
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<CategoryDTO> updateCategory(@PathVariable Long id, @RequestBody @Valid CategoryForm form){
-        var category = catRepo.findById(id);
-        if (category.isPresent()){
-            Category cat = form.update(id, catRepo);
-            return ResponseEntity.ok(new CategoryDTO(cat));
+        var optional = catRepo.findById(id);
+        if (optional.isPresent()){
+            Category category= form.update(id, catRepo);
+            return ResponseEntity.ok(new CategoryDTO(category));
         }
         return ResponseEntity.notFound().build();
     }
@@ -69,5 +68,4 @@ public class CategoryController {
         }
         return ResponseEntity.notFound().build();
     }
-
 }
