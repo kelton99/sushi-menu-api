@@ -39,7 +39,7 @@ public class IngredientController {
     @PostMapping
     @Transactional
     public ResponseEntity<IngredientDTO> saveIngredient(@RequestBody @Valid IngredientForm form, UriComponentsBuilder uriBuilder){
-        var ingredient = form.toEntity(ingredientRepository);
+        var ingredient = form.toEntity();
         ingredientRepository.save(ingredient);
 
         URI uri = uriBuilder.path("/ingredient/{id}").buildAndExpand(ingredient.getId()).toUri();

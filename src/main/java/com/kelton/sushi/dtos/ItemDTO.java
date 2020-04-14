@@ -9,7 +9,6 @@ public class ItemDTO {
     public ItemDTO(Item item) {
         this.id = item.getId();
         this.name = item.getName();
-
     }
 
     public Long getId() {

@@ -15,15 +15,15 @@ public class CategoryDTO {
         this.name = category.getName();
     }
 
-    public static List<CategoryDTO> convert(List<Category> categories) {
-        return categories.stream().map(CategoryDTO::new).collect(Collectors.toList());
-    }
-
     public Long getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public static List<CategoryDTO> convert(List<Category> categories) {
+        return categories.stream().map(CategoryDTO::new).collect(Collectors.toList());
     }
 }

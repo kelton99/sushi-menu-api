@@ -4,6 +4,7 @@ import com.kelton.sushi.entities.Ingredient;
 import com.kelton.sushi.entities.Item;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ public class CompleteItemDTO extends ItemDTO {
 
     private String description;
     private Float price;
+    private String category;
     private List<String> ingredients;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -19,6 +21,10 @@ public class CompleteItemDTO extends ItemDTO {
         super(item);
         this.description = item.getDescription();
         this.price = item.getPrice();
+        if(item.getCategory() != null )
+            this.category = item.getCategory().getName();
+
+        this.ingredients = new ArrayList<>();
         this.ingredients.addAll(item.getIngredients().stream().map(Ingredient::getName).collect(Collectors.toList()));
         this.createdAt = item.getCreatedAt();
         this.updatedAt = item.getUpdatedAt();
@@ -32,6 +38,8 @@ public class CompleteItemDTO extends ItemDTO {
         return price;
     }
 
+    public String getCategory() {return category; }
+
     public List<String> getIngredients() {
         return ingredients;
     }
@@ -42,5 +50,9 @@ public class CompleteItemDTO extends ItemDTO {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public static List<CompleteItemDTO> toDTO(List<Item> items) {
+        return items.stream().map(CompleteItemDTO::new).collect(Collectors.toList());
     }
 }

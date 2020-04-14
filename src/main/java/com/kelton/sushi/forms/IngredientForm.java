@@ -9,15 +9,15 @@ public class IngredientForm {
 
     private String name;
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public void setNome(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Ingredient toEntity(IngredientRepository ingredientRepository) {
+    public Ingredient toEntity() {
         return new Ingredient(name);
     }
 
