@@ -3,6 +3,7 @@ package com.kelton.sushi.controllers;
 import com.kelton.sushi.dtos.CompleteIngredientDTO;
 import com.kelton.sushi.dtos.IngredientDTO;
 import com.kelton.sushi.entities.Ingredient;
+import com.kelton.sushi.entities.Item;
 import com.kelton.sushi.forms.IngredientForm;
 import com.kelton.sushi.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,9 @@ public class IngredientController {
         var ingredient = ingredientRepository.findById(id);
 
         if(ingredient.isPresent()){
+            for(Item item: ingredient.get().getItems())
+                item.getIngredients().remove(ingredient.get());
+
             ingredientRepository.deleteById(id);
             return ResponseEntity.ok().build();
         }

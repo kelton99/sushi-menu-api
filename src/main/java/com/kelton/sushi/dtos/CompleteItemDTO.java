@@ -12,7 +12,7 @@ public class CompleteItemDTO extends ItemDTO {
 
     private String description;
     private Float price;
-    private String category;
+    private String category = "No category";
     private List<String> ingredients;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -21,10 +21,11 @@ public class CompleteItemDTO extends ItemDTO {
         super(item);
         this.description = item.getDescription();
         this.price = item.getPrice();
-        if(item.getCategory() != null )
-            this.category = item.getCategory().getName();
+        if(item.getCategory() != null ) this.category = item.getCategory().getName();
+
         this.ingredients = new ArrayList<>();
-        item.getIngredients().forEach(ingredient -> this.ingredients.add(ingredient.getName()));
+        if(item.getIngredients() != null)
+            item.getIngredients().forEach(ingredient -> this.ingredients.add(ingredient.getName()));
         this.createdAt = item.getCreatedAt();
         this.updatedAt = item.getUpdatedAt();
     }

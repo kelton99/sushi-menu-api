@@ -5,6 +5,7 @@ import com.kelton.sushi.dtos.CompleteCategoryDTO;
 import com.kelton.sushi.entities.Category;
 import com.kelton.sushi.forms.CategoryForm;
 import com.kelton.sushi.repositories.CategoryRepository;
+import com.kelton.sushi.repositories.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ public class CategoryController {
 
     @Autowired
     private CategoryRepository catRepo;
+
+    @Autowired
+    private ItemRepository itemRepo;
 
     @GetMapping
     public List<CategoryDTO> getCategories(){
@@ -63,6 +67,7 @@ public class CategoryController {
         var category = catRepo.findById(id);
 
         if(category.isPresent()){
+            itemRepo.findAllByCategory_Id(id).forEach(i -> i.setCategory(null));
             catRepo.deleteById(id);
             return ResponseEntity.ok().build();
         }
