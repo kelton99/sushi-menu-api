@@ -7,7 +7,6 @@ import com.kelton.sushi.repositories.CategoryRepository;
 import com.kelton.sushi.repositories.IngredientRepository;
 import com.kelton.sushi.repositories.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -36,7 +35,7 @@ public class ItemController {
         return CompleteItemDTO.toDTO(items);
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<CompleteItemDTO> getItem(@PathVariable Long id){
         var item = itemRepo.findById(id);
         if(item.isPresent())
@@ -64,7 +63,7 @@ public class ItemController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> deleteItem(@PathVariable Long id){
         var item = itemRepo.findById(id);

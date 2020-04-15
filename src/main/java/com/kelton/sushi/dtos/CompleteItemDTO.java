@@ -23,9 +23,8 @@ public class CompleteItemDTO extends ItemDTO {
         this.price = item.getPrice();
         if(item.getCategory() != null )
             this.category = item.getCategory().getName();
-
         this.ingredients = new ArrayList<>();
-        this.ingredients.addAll(item.getIngredients().stream().map(Ingredient::getName).collect(Collectors.toList()));
+        item.getIngredients().forEach(ingredient -> this.ingredients.add(ingredient.getName()));
         this.createdAt = item.getCreatedAt();
         this.updatedAt = item.getUpdatedAt();
     }

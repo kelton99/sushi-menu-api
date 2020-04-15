@@ -57,7 +57,7 @@ public class IngredientController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<?> deleteIngredient(@PathVariable Long id){
         var ingredient = ingredientRepository.findById(id);

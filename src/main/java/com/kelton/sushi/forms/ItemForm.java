@@ -80,7 +80,9 @@ public class ItemForm {
         item.setPrice(price);
         item.setUpdatedAt(LocalDateTime.now());
         if(idCategory != null) item.setCategory(categoryRepo.findById(id).get());
-        if(idIngredients != null) item.getIngredients().addAll(ingredientRepo.findAllById(idIngredients));
+        if(idIngredients != null) {
+            item.getIngredients().clear();
+            item.getIngredients().addAll(ingredientRepo.findAllById(idIngredients));}
         return item;
     }
 }
