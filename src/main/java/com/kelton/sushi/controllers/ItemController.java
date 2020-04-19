@@ -7,6 +7,8 @@ import com.kelton.sushi.repositories.CategoryRepository;
 import com.kelton.sushi.repositories.IngredientRepository;
 import com.kelton.sushi.repositories.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -30,8 +32,13 @@ public class ItemController {
     private IngredientRepository ingredientRepo;
 
     @GetMapping
-    public List<CompleteItemDTO> getItems(){
-        var items = itemRepo.findAll();
+    public Page<CompleteItemDTO> getItems(@RequestParam(required = false) String param, Pageable pagination){
+        Page<Item> items;
+        if(param != null)
+            items = itemRepo.findByNameContains(param, pagination);
+        else
+            items = itemRepo.findAll(pagination);
+
         return CompleteItemDTO.toDTO(items);
     }
 

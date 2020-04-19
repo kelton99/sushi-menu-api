@@ -1,7 +1,6 @@
 package com.kelton.sushi.dtos;
 
 import com.kelton.sushi.entities.Ingredient;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

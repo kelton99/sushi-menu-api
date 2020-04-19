@@ -2,6 +2,7 @@ package com.kelton.sushi.dtos;
 
 import com.kelton.sushi.entities.Ingredient;
 import com.kelton.sushi.entities.Item;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,7 +22,9 @@ public class CompleteItemDTO extends ItemDTO {
         super(item);
         this.description = item.getDescription();
         this.price = item.getPrice();
-        if(item.getCategory() != null ) this.category = item.getCategory().getName();
+
+        if(item.getCategory() != null )
+            this.category = item.getCategory().getName();
 
         this.ingredients = new ArrayList<>();
         if(item.getIngredients() != null)
@@ -52,7 +55,7 @@ public class CompleteItemDTO extends ItemDTO {
         return updatedAt;
     }
 
-    public static List<CompleteItemDTO> toDTO(List<Item> items) {
-        return items.stream().map(CompleteItemDTO::new).collect(Collectors.toList());
+    public static Page<CompleteItemDTO> toDTO(Page<Item> items) {
+        return items.map(CompleteItemDTO::new);
     }
 }
